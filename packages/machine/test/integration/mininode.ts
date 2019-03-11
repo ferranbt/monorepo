@@ -4,15 +4,11 @@ import {
   StateChannel
 } from "@counterfactual/machine/src";
 import { NetworkContext } from "@counterfactual/types";
-import { utils } from "ethers";
 import { JsonRpcProvider } from "ethers/providers";
-import { SigningKey } from "ethers/utils";
-import { HDNode } from "ethers/utils/hdnode";
+import { randomBytes, SigningKey } from "ethers/utils";
+import { entropyToMnemonic, fromMnemonic, HDNode } from "ethers/utils/hdnode";
 
-const randomHDNode = () =>
-  utils.HDNode.fromMnemonic(
-    utils.HDNode.entropyToMnemonic(utils.randomBytes(20))
-  );
+const randomHDNode = () => fromMnemonic(entropyToMnemonic(randomBytes(20)));
 
 const makeSigner = (signer: HDNode) => (asIntermediary: boolean) => {
   return async (args: any[]) => {
