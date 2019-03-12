@@ -43,7 +43,10 @@ export class MiniNode {
     this.scm = new Map<string, StateChannel>();
     this.ie = new InstructionExecutor(networkContext, provider);
     this.ie.register(Opcode.OP_SIGN, makeSigner(this.hdNode, false));
-    this.ie.register(Opcode.OP_SIGN_AS_INTERMEDIARY, makeSigner(this.hdNode, true));
+    this.ie.register(
+      Opcode.OP_SIGN_AS_INTERMEDIARY,
+      makeSigner(this.hdNode, true)
+    );
     this.ie.register(Opcode.WRITE_COMMITMENT, () => {});
   }
 
